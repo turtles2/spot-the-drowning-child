@@ -155,7 +155,7 @@ function loadScript(src, callback)
         }
         player.pauseVideo();
       }
-      ga('send', 'event', gameState.videoId, 'click', 'video clicked', {'dimension1': gameState.videoId});
+
     });
 
     dom.cursorDot.click(function() {
@@ -175,8 +175,7 @@ function loadScript(src, callback)
     dom.findBox.attr('style', gameState.findBoxStyle);
     player.playVideo();
 
-    ga('set', 'dimension1', gameState.videoId);
-    ga('send', 'event', 'game', 'setup', gameState.videoId);
+
     amplitude.setUserProperties({videoId: gameState.videoId, 'replays': gameState.replays});
     amplitude.logEvent("game setup", {'replays': gameState.replays});
 
@@ -262,8 +261,7 @@ function loadScript(src, callback)
 
   function success() {
     gameState.winTime = player.getCurrentTime();
-    ga('send', 'event', 'game', 'success', gameState.videoId);
-    ga('send', 'event', gameState.videoId, 'win', 'game time', gameState.winTime);
+
 
 
     var status = gameState.status();
@@ -290,7 +288,7 @@ function loadScript(src, callback)
     dom.showStatus(msg);
     dom.showTime(time);
     if (time <= 0) {
-      ga('send', 'event', 'game', 'predicted', gameState.videoId);
+
     }
     loadScript('article.js', function() {
       Article.getDom(dom).then(function(dom) {
@@ -309,7 +307,7 @@ function loadScript(src, callback)
     gameState.ended = true;
     function showPlayAgain() { dom.showPlayAgain(); }
     function showTryAgain() { dom.showTryAgain(); }
-    ga('send', 'event', 'game', 'end', gameState.videoId);
+
     dom.statusBox.addClass('end');
     loadScript('article.js', function() {
       Article.getDom(dom).then(function(dom) {
@@ -336,7 +334,7 @@ function loadScript(src, callback)
         clearInterval(gameState.frameRefresh);
     } else if (event.data === YT.PlayerState.PAUSED) {
       gameState.pauseCount += 1;
-      ga('send', 'event', 'game', 'paused', gameState.videoId, gameState.pauseCount);
+
       dom.cursorLooks.hide();
       if (status === 'drowning' || status === 'ok') {
         if (!dom.isMobile() || gameState.pauseCount > 1) {
@@ -354,7 +352,7 @@ function loadScript(src, callback)
       if (gameState.videoEnded) {
         reset();  // Reset on video loop.
       }
-      ga('send', 'event', 'game', 'played', gameState.videoId);
+    
       if (!dom.isMobile())
         dom.cursorLooks.show();
       if (status === 'drowning' || status === 'ok' || status === 'spotted') {
