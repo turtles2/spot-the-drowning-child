@@ -2,7 +2,7 @@
 Lifeguarding Game
 
 This Project is a fork from FrankSalad I have changed the navigation and automated the new video submission
-system (In Progress). I have also added a lifeguard scanning games and submission tool (Roadmaped).
+system (In Progress). I have also added a lifeguard scanning game o and submission tool (Roadmaped).
 
 [Spot The Drowning Child](http://spotthedrowningchild.com)
 

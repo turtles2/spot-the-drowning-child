@@ -36,10 +36,8 @@
 </head>
 <body>
   <h1>STDC Level Creator Tool</h1>
-  <p>After you have set up the level with the tools below, copy and paste this:</p>
   <pre id="output">
   </pre>
-  <p>into a <a href="https://github.com/FrankSalad/spot-the-drowning-child/issues/new">new issue</a>.</p>
   <ol>
   <li>Find a lifeguard saving lives <a href="https://www.youtube.com/results?search_query=Lifeguard+rescue" target="_blank">on YouTube.</a>
   <li><div class="tool">Copy and paste the video url: https://www.youtube.com/watch?v=<input type="text" placeholder="Video ID" id="video-id"/> <button onclick="loadVideo()">Load Video</button></div>
@@ -51,6 +49,9 @@
   </div>
   <li><div class="tool">Watch video again, confirm swimmer status changes: <span id="status"></span></div>
   <li><div>Move and scale the red box over the drowning swimmer.</div>
+      <li>
+          <button onclick="save()">Save to Database</button>
+      </li>
   <div id="playfield">
     <div id="player"></div>
     <div id="box" style=""></div>
@@ -184,7 +185,23 @@
       currentItem.findBoxStyle = style;
     }
 
+    function save()
+    {
 
+        var data = {
+            "videoId": videoInput.value,
+            "drowningStartSecs": currentItem.drowningStartSecs,
+            "whistleSecs":  currentItem.whistleSecs,
+            "swimmerSavedSecs": currentItem.swimmerSavedSecs,
+            "findBoxStyle": currentItem.findBoxStyle
+        };
+
+        if(confirm("Are you sure you want to save the video?")){
+
+            $.post("addvideo.php", data);
+
+        }
+    }
 
 
 
